@@ -1,4 +1,4 @@
-# $Revision: 1.7 $Date: 2003-05-25 05:51:13 $
+# $Revision: 1.8 $Date: 2003-05-28 12:59:59 $
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
@@ -7,6 +7,7 @@ Release:	1
 License:	GPL
 Group:		Base
 Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql-%{version}.tar.gz
+# Source0-md5:	73b29c27ad0784baea985f0cf77eec48
 URL:		http://sysauth-pgsql.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
