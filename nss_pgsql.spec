@@ -1,33 +1,32 @@
-# $Revision: 1.1 $Date: 2002-11-04 16:50:15 $
-Summary:	Postgresql Name Service Switch Module
+# $Revision: 1.2 $Date: 2002-11-05 13:56:32 $
+Summary:	PostgreSQL Name Service Switch Module
+Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
 Version:	1.0.0
 Release:	1
 License:	GPL
 Group:		Base
-Source0:	libnss-pgsql-%{version}.tar.gz
-URL:		http://www.freesoftware.fsf.org/nss-mysql/
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/sysauth-pgsql/libnss-pgsql-%{version}.tar.gz
+URL:		http://sysauth-pgsql.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	zlib-devel
-BuildRequires:	postgresql-devel
 # should be bcond'ed
 BuildRequires:	openssl-devel
+BuildRequires:	postgresql-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		/lib
 
 %description
-NSS PgSQL is a NSS library for Postgresql.
+NSS PgSQL is a NSS library for PostgreSQL.
 
 %description -l pl
-NSS PgSQL jest bibliotek± NSS dla Postgresql.
+NSS PgSQL jest bibliotek± NSS dla PostgreSQL.
 
 %prep
 %setup -q -n libnss-pgsql-%{version}
-#%patch0 -p1
-#%patch1 -p1
 perl -pi -e 's/\#include\ \<postgresql\/libpq-fe.h\>/\#include\ \<libpq-fe.h>/' src/backend.c
 
 %build
@@ -54,6 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%doc AUTHORS ChangeLog NEWS README SHADOW THANKS TODO UPGRADE *.sql
+%doc AUTHORS ChangeLog NEWS README doc/nss-pgsql.txt
 %attr(755,root,root) %{_libdir}/*.so*
 #%attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/nss*.conf
