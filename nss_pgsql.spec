@@ -2,11 +2,12 @@ Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
 Version:	1.0.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Base
 Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql-%{version}.tar.gz
 # Source0-md5:	73b29c27ad0784baea985f0cf77eec48
+Patch0:		%{name}-glibc.patch
 URL:		http://sysauth-pgsql.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -16,7 +17,7 @@ BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	postgresql-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_libdir		/lib
+%define		_libdir		/%{_lib}
 
 %description
 NSS PgSQL is a NSS library for PostgreSQL.
@@ -26,6 +27,8 @@ NSS PgSQL jest bibliotek± NSS dla PostgreSQL.
 
 %prep
 %setup -q -n libnss-pgsql-%{version}
+%patch0 -p1
+
 sed -e 's@#include <postgresql/libpq-fe.h>@#include <libpq-fe.h>@' \
 	src/backend.c > backend.c.tmp
 mv -f backend.c.tmp src/backend.c
