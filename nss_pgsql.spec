@@ -1,4 +1,4 @@
-# $Revision: 1.3.2.1 $Date: 2003-07-11 12:02:10 $
+# $Revision: 1.3.2.2 $Date: 2004-03-19 13:10:25 $
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
@@ -12,7 +12,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 # should be bcond'ed
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.6m
 BuildRequires:	postgresql-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
