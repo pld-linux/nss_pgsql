@@ -1,4 +1,4 @@
-# $Revision: 1.2 $Date: 2002-11-05 13:56:32 $
+# $Revision: 1.3 $Date: 2002-11-06 07:21:55 $
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
@@ -40,10 +40,12 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_libdir}}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install conf/nss-pgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,6 +55,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README doc/nss-pgsql.txt
-%attr(755,root,root) %{_libdir}/*.so*
-#%attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/nss*.conf
+%doc AUTHORS ChangeLog NEWS conf/dbschema.sql doc/nss-pgsql.txt
+%attr(755,root,root) %{_libdir}/*.so.*.*
+%attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/nss-pgsql.conf
