@@ -1,4 +1,4 @@
-# $Revision: 1.5 $Date: 2003-04-08 13:28:38 $
+# $Revision: 1.6 $Date: 2003-05-09 09:57:40 $
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
@@ -14,7 +14,6 @@ BuildRequires:	libtool
 # should be bcond'ed
 BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	postgresql-devel
-BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		/lib
@@ -27,10 +26,12 @@ NSS PgSQL jest bibliotek± NSS dla PostgreSQL.
 
 %prep
 %setup -q -n libnss-pgsql-%{version}
-perl -pi -e 's/\#include\ \<postgresql\/libpq-fe.h\>/\#include\ \<libpq-fe.h>/' src/backend.c
+sed -e 's@#include <postgresql/libpq-fe.h>@#include <libpq-fe.h>@' \
+	src/backend.c > backend.c.tmp
+mv -f backend.c.tmp src/backend.c
 
 %build
-rm -f missing
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -46,6 +47,9 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install conf/nss-pgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}
+
+# useless for module
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
