@@ -1,4 +1,3 @@
-# $Revision: 1.8 $Date: 2003-05-28 12:59:59 $
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
