@@ -6,7 +6,7 @@ Release:	1
 Epoch:		1
 License:	GPL
 Group:		Base
-Source0:	http://unc.dl.sourceforge.net/sourceforge/sysauth-pgsql/libnss-pgsql_%{version}.orig.tar.gz
+Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql_%{version}.orig.tar.gz
 # Source0-md5:	8a026a909165a6c30781819af95282ad
 URL:		http://sysauth-pgsql.sourceforge.net/
 BuildRequires:	autoconf
