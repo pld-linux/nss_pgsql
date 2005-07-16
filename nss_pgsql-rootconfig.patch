@@ -1,0 +1,52 @@
+diff -urN libnss-pgsql-1.3-o/conf/nss-pgsql-root.conf libnss-pgsql-1.3/conf/nss-pgsql-root.conf
+--- libnss-pgsql-1.3-o/conf/nss-pgsql-root.conf	1969-12-31 17:00:00.000000000 -0700
++++ libnss-pgsql-1.3/conf/nss-pgsql-root.conf	2005-07-15 18:01:23.000000000 -0600
+@@ -0,0 +1,3 @@
++# Add config directives here that should only be available to
++# root, such as a username and password that will grant access
++# to the password column of the shadow table.
+diff -urN libnss-pgsql-1.3-o/src/config.c libnss-pgsql-1.3/src/config.c
+--- libnss-pgsql-1.3-o/src/config.c	2005-03-03 10:30:20.000000000 -0700
++++ libnss-pgsql-1.3/src/config.c	2005-07-15 18:00:31.000000000 -0600
+@@ -17,6 +17,7 @@
+ #define HASHMAX 150
+ #define CFGLINEMAX 256
+ #define CFGFILE SYSCONFDIR"/nss-pgsql.conf"
++#define CFGFILEROOT SYSCONFDIR"/nss-pgsql-root.conf"
+ 
+ static char *_options[HASHMAX];
+ static unsigned int _isopen = 0;
+@@ -38,10 +39,23 @@
+ }
+ 
+ /*
+- * read configfile and save values in hashtable
++ * read configfile(s) and save values in hashtable
+  */
+ int readconfig(void)
+ {
++	int ret;
++	ret = readconfig_with_name(CFGFILE);
++	if(geteuid() == 0) {
++		ret = readconfig_with_name(CFGFILEROOT);
++	}
++	return ret;
++}
++
++/*
++ * read configfile specified and save values in hashtable
++ */
++int readconfig_with_name(const char *filename)
++{
+ 	FILE *cf;
+ 	char line[CFGLINEMAX], key[CFGLINEMAX], val[CFGLINEMAX], *c;
+ 	unsigned int h;
+@@ -50,7 +64,7 @@
+ 	if(_isopen)
+ 		return 1;
+ 	
+-	if(!(cf = fopen(CFGFILE, "r"))) {
++	if(!(cf = fopen(filename, "r"))) {
+ 		print_msg("could not open config file " CFGFILE "\n");
+ 		return 0;
+ 	}
