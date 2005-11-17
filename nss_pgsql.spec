@@ -51,7 +51,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install conf/nss-pgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}
+install conf/nss-pgsql-newsyntax.conf $RPM_BUILD_ROOT%{_sysconfdir}/nss-pgsql.conf
 install conf/nss-pgsql-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 # useless for module
