@@ -1,14 +1,13 @@
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
-Version:	1.3
-Release:	1
+Version:	1.4.0
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Base
-Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql_%{version}.orig.tar.gz
-# Source0-md5:	8a026a909165a6c30781819af95282ad
-Patch0:		%{name}-rootconfig.patch
+Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql-%{version}.tgz
+# Source0-md5:	a0507f407a9efb564562969af1130d25
 URL:		http://sysauth-pgsql.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -29,7 +28,6 @@ NSS PgSQL jest bibliotek± NSS dla PostgreSQL.
 
 %prep
 %setup -q -n libnss-pgsql-%{version}
-%patch0 -p1
 
 sed -e 's@#include <postgresql/libpq-fe.h>@#include <libpq-fe.h>@' \
 	src/backend.c > backend.c.tmp
@@ -51,7 +49,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install conf/nss-pgsql-newsyntax.conf $RPM_BUILD_ROOT%{_sysconfdir}/nss-pgsql.conf
+install conf/nss-pgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install conf/nss-pgsql-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 # useless for module
