@@ -65,5 +65,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS conf/dbschema.sql doc/*.html doc/*.png
 %attr(755,root,root) %{_libdir}/*.so.*.*
-%attr(644,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/nss-pgsql.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/nss-pgsql.conf
 %attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/nss-pgsql-root.conf
