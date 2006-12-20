@@ -2,7 +2,7 @@ Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
 Version:	1.0.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql-%{version}.tar.gz
