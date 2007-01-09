@@ -1,19 +1,22 @@
+#
+# Conditional build:
+%bcond_without	openssl
+#
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
 Name:		nss_pgsql
 Version:	1.4.0
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Base
 Source0:	http://dl.sourceforge.net/sysauth-pgsql/libnss-pgsql-%{version}.tgz
 # Source0-md5:	a0507f407a9efb564562969af1130d25
-URL:		http://sysauth-pgsql.sourceforge.net/
+URL:		http://sysauth.projects.postgresql.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-# should be bcond'ed
-BuildRequires:	openssl-devel >= 0.9.7d
+%{?with_openssl:BuildRequires:	openssl-devel >= 0.9.7d}
 BuildRequires:	postgresql-devel
 BuildRequires:	xmlto
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -40,7 +43,7 @@ mv -f backend.c.tmp src/backend.c
 %{__automake}
 %configure \
 	%{?debug:--enable-debug} \
-	--with-ssl
+	%{?with_openssl:--with-ssl}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -53,7 +56,7 @@ install conf/nss-pgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install conf/nss-pgsql-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 # useless for module
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.{a,la,so}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
