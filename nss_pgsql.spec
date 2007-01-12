@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	openssl
+%bcond_without	openssl		# without SSL support
 #
 Summary:	PostgreSQL Name Service Switch Module
 Summary(pl):	Modu³ NSS PostgreSQL
@@ -42,6 +42,7 @@ mv -f backend.c.tmp src/backend.c
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-static \
 	%{?debug:--enable-debug} \
 	%{?with_openssl:--with-ssl}
 
@@ -56,7 +57,7 @@ install conf/nss-pgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install conf/nss-pgsql-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 # useless for module
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.{a,la,so}
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
