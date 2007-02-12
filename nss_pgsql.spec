@@ -3,7 +3,7 @@
 %bcond_without	openssl		# without SSL support
 #
 Summary:	PostgreSQL Name Service Switch Module
-Summary(pl):	Modu³ NSS PostgreSQL
+Summary(pl.UTF-8):   ModuÅ‚ NSS PostgreSQL
 Name:		nss_pgsql
 Version:	1.4.0
 Release:	1
@@ -26,8 +26,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 NSS PgSQL is a NSS library for PostgreSQL.
 
-%description -l pl
-NSS PgSQL jest bibliotek± NSS dla PostgreSQL.
+%description -l pl.UTF-8
+NSS PgSQL jest bibliotekÄ… NSS dla PostgreSQL.
 
 %prep
 %setup -q -n libnss-pgsql-%{version}
