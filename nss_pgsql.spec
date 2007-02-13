@@ -3,7 +3,7 @@
 %bcond_without	openssl		# without SSL support
 #
 Summary:	PostgreSQL Name Service Switch Module
-Summary(pl.UTF-8):   Moduł NSS PostgreSQL
+Summary(pl.UTF-8):	Moduł NSS PostgreSQL
 Name:		nss_pgsql
 Version:	1.4.0
 Release:	1
